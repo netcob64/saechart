@@ -23,7 +23,7 @@ It may be usefull to add the following features :
 
 # package content
 `
-+js/   : jquery, MS Ajax, and ChartJS javascript lib
++ js/ : jquery, MS Ajax, and ChartJS javascript lib
 + SAECharts/
 + -- stylesheets/ : exemple of css
 + -- js/
