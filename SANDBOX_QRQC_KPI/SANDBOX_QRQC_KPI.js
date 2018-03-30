@@ -13,7 +13,7 @@ var darkColorSeries = ['rgba(0, 104, 179,1)',
     'rgba(235,177,0,1)',
     'rgba(139,60,199,1)'
 ];
-//Glob params
+//Glob params 
 var ch1;
 var m = '01';
 var y = '2018';
