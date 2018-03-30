@@ -1,0 +1,113 @@
+body {
+    padding: 10px;
+    font: 14px Segoe UI light;
+    margin: 2px;
+}
+
+.month-select {
+    text-align: center;
+    font-size: 100%;
+    cursor: pointer;
+}
+
+#graphbox {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: stretch;
+}
+
+#monthMenu, #yearMenu {
+    display: flex;
+    flex-flow: row wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: space-between;
+}
+
+#currentkpi {   
+    order: 1;
+    flex: 2 4 auto;
+    min-width: 500px;
+    max-width: 1000px;
+  
+}
+.chart-container {
+	  /*background-color: #aaa;*/ opacity: 0;
+    transition: opacity 1.5s ease-out;
+}
+#historyTitle{
+	flex: 1 1 auto;
+}
+#tendence {
+    order: 2;
+    flex: 1 1 auto;
+    max-width: 800px;
+    min-width: 600px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#lineChart {
+	flex: 1 1 auto;
+	/*background-color: #ccc;*/
+}
+.switch-field {
+    padding: 1px;
+  
+    overflow: hidden;
+}
+
+.switch-title {
+    margin-bottom: 6px;
+}
+
+.switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+}
+
+.switch-field label {
+    float: left;
+    display: inline-block;
+    padding: 1px 10px;
+    background-color: #e4e4e4;  
+    font-weight: normal;
+    text-align: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.2);
+    text-shadow: none;
+    -webkit-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -ms-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out;
+} 
+
+.switch-field label:hover {
+    cursor: pointer;
+    background-color: #d3d3d3;  
+}
+
+.switch-field input:checked+label {
+    background-color: #ccc;
+}
+
+.switch-field label:first-of-type {
+    border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+    border-radius: 0 4px 4px 0;
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
