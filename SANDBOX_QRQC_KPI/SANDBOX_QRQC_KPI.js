@@ -1,6 +1,6 @@
 'use strict';
 
-// Load the required SharePoint libraries.
+// Co;lors for History trend chart
 var colorSeries = ['rgba(0, 104, 179,0.5)',
     'rgba(213,112,42,0.5)',
     'rgba(129,189,74,0.5)',
@@ -13,17 +13,23 @@ var darkColorSeries = ['rgba(0, 104, 179,1)',
     'rgba(235,177,0,1)',
     'rgba(139,60,199,1)'
 ];
-//Glob params 
-var ch1;
-var m = '01';
-var y = '2018';
-var pm = m;
-var py = y;
+
+function getCurrentYearMonth() {
+    var currentDate = new Date();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    return {
+        "year": year.toString(),
+        "month": (month < 10 ? '0' + month.toString() : month.toString())
+    }
+}
+var curKPIChart;
+var curYearMonth = getCurrentYearMonth();
+var currentMonth = curYearMonth.month;
+var currentYear = curYearMonth.year;
 var nbKPI = 3;
 var monthButtonSelected;
-var prevMonthButtonSelected;
 var yearButtonSelected;
-var prevYearButtonSelected;
 var yearPrefix = 'switch_year_';
 var monthPrefix = 'switch_month_';
 var unsetcolor = '#fff';
@@ -43,9 +49,9 @@ var param = {
     "spListeUrl": '/snm/dsi/pdp',
     "spListItemTitle": undefined,
     "spScriptbase": '/snm/_layouts/15/',
-    "canvasId": undefined,
-    "year": y,
-    "month": m,
+    "canvasId": 'canvasWheelChart',
+    "year": currentYear,
+    "month": currentMonth,
     "defaultNbDataSet": nbKPI,
     "name": 'S',
     "options": {
@@ -70,28 +76,26 @@ var computedData;
 var labels = [];
 
 $(document).ready(function() {
-    $('#title').text(y + '/' + m);
-    param.canvasId = 'canvasWheelChart';
-    param.spListItemTitle = y + '-' + m + param.titlePostFix;
-    ch1 = new SAESPWheelChart(param);
-    ch1.setUpdateHandler(function() {
-        ch1.save();
+    $('#title').text(currentYear + '/' + currentMonth);
+    param.spListItemTitle = currentYear + '-' + currentMonth + param.titlePostFix;
+
+    // Create QRQC WheelChart
+    curKPIChart = new SAESPWheelChart(param);
+    curKPIChart.setUpdateHandler(function() {
+        curKPIChart.save();
+    });
+    // Load QRQC WheelChart data from SP List
+    curKPIChart.load(function() {
+        //console.log("curKPIChart loaded...");
+        curKPIChart.show();
+        curKPIChart.loadTrend(LoadHistoyGraph);
     });
 
-    ch1.load(function() {
+    InitDateMenu();
+    SetLegend();
+});
 
-        //console.log("ch1 loaded...");
-        show(ch1);
-
-        ch1.loadTrend(LoadHistoyGraph);
-    });
-
-
-    createMenu('year', $('#yearMenu'), [2016, 2017, 2018], 2018, yearPrefix, 'SelectYear');
-    prevYearButtonSelected = yearButtonSelected = $('#' + yearPrefix + y);
-    createMenu('month', $('#monthMenu'), ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'], 'Janvier', monthPrefix, 'SelectMonth');
-    prevMonthButtonSelected = monthButtonSelected = $('#' + monthPrefix + m);
-
+function SetLegend() {
     var lgd = '<b>L&eacute;gende:</b> de l&quot;ext&eacute;rieur vers l&quot;int&eacute;rieur : ' +
         '<ul style="margin: initial;">';
     for (var t in legends) {
@@ -101,7 +105,16 @@ $(document).ready(function() {
 
     $('#legend').css("margin-left", 10);
     $('#legend').html(lgd);
-});
+}
+
+function InitDateMenu() {
+    createMenu('year', $('#yearMenu'), [2017, 2018], 2018, yearPrefix, 'SelectYear');
+    yearButtonSelected = $('#' + yearPrefix + currentYear);
+    createMenu('month', $('#monthMenu'), ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'], 'Janvier', monthPrefix, 'SelectMonth');
+    monthButtonSelected = $('#' + monthPrefix + currentMonth);
+    SetYear(currentYear);
+    SetMonth(currentMonth);
+}
 
 function LoadHistoyGraph(data, minDate, maxDate) {
     if (minDate != -1 && maxDate != -1) {
@@ -270,83 +283,47 @@ function createMenu(type, parent, values, selectedValue, prefix, handlerName) {
     }
 }
 
-function SelectYear(year) {
-    prevYearButtonSelected = $('#' + yearPrefix + y);
+function SetYear(year) {
     yearButtonSelected = $('#' + yearPrefix + year);
-    py = y;
-    y = year;
+    yearButtonSelected.prop('checked', true);
+    currentYear = year;
+}
+
+function SelectYear(year) {
+    SetYear(year);
     reload();
+}
+
+function SetMonth(month) {
+    monthButtonSelected = $('#' + monthPrefix + month);
+    monthButtonSelected.prop('checked', true);
+    currentMonth = month;
 }
 
 function SelectMonth(month) {
-    prevMonthButtonSelected = $('#' + monthPrefix + m);
-    monthButtonSelected = $('#' + monthPrefix + month);
-    pm = m;
-    m = month;
+    SetMonth(month);
     reload();
 }
 
-function show() {
-
-    $(".chart-container").css("opacity", 1);
-}
-
-function hide() {
-    $(".chart-container").css("opacity", 0.5);
-}
-
 function reload() {
-    var graphListItemTitle = y + '-' + m + param.titlePostFix;
-    //console.log(graphListItemTitle);
-    var cv = $(ch1.getCanvas());
-    var div = cv.parent();
-
-    var id = cv.attr("id");
-    cv.attr("id", id + 'old');
-    var display = cv.css("display");
-    var w = cv.width();
-
-    cv.css("display", 'none');
-    var newcanvas = $('<canvas id="' + id + '" style="border:solid 0px #000;float:left;"></canvas>');
-    newcanvas.width(w);
-    $(div).append(newcanvas);
-    param.canvasId = id;
+    var graphListItemTitle = currentYear + '-' + currentMonth + param.titlePostFix;
+    curKPIChart.destroy();
     param.spListItemTitle = graphListItemTitle;
-    param.year = y;
-    param.month = m;
+    param.year = currentYear;
+    param.month = currentMonth;
 
-    var ch2 = new SAESPWheelChart(param);
-    ch2.setUpdateHandler(function() {
-        ch2.save();
+    curKPIChart = new SAESPWheelChart(param);
+    curKPIChart.setUpdateHandler(function() {
+        curKPIChart.save();
     });
-    hide();
-    ch2.load(function() {
-        // Load success Handler
-            //console.log("ch1 reloaded...");
-            cv.remove();
-            div.remove(".chartjs-size-monitor");
-            $('#title').text(y + '/' + m);
-            show();
-            ch1 = ch2;
-            prevMonthButtonSelected = monthButtonSelected;
-            prevYearButtonSelected = yearButtonSelected;
+
+    $('#title').text(currentYear + '/' + currentMonth);
+    curKPIChart.load(function() {
+            // Load success Handler
+            //console.log("curKPIChart reloaded...");
+            curKPIChart.show();
         },
         function() {
             // Load failed handler
-            //y = py;
-            //m = pm;
-            //console.log("ch1 load error...");
-            newcanvas.attr("id", id + 'new');
-            cv.attr("id", id);
-            cv.css("display", display);
-            newcanvas.remove();
-            show();
-            $('#year').val(y);
-            $('#title').text(y + '/' + m);
-/*
-            prevMonthButtonSelected.prop('checked', true);
-            monthButtonSelected = prevMonthButtonSelected;
-            prevYearButtonSelected.prop('checked', true);
-            yearButtonSelected = prevYearButtonSelected;*/
         });
 }

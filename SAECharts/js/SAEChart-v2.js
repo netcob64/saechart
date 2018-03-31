@@ -221,6 +221,7 @@ function SAEWheelChart(canvasId, name, options) {
         Chart.controllers.derivedDoughnut = custom;
 
         this.canvas = document.getElementById(this.canvasId);
+        injectCSS(this, '#' + this.canvasId + '{transition: opacity 5s ease-out;}');
         this.canvasPopup = document.getElementById(this.bubbleId);
         var ctx = this.canvas.getContext('2d');
         var chartOptions = {
@@ -269,10 +270,8 @@ function SAEWheelChart(canvasId, name, options) {
 
 
         });
-
-
-        chart.theData = this.theData;
         this.chart = chart;
+        chart.theData = this.theData;
         var me = this;
 
         // add click evt on canvas
@@ -330,7 +329,6 @@ function SAEWheelChart(canvasId, name, options) {
     this._init(canvasId, name, options);
 
     var me = this;
-
 
     //console.log('set id='+$(this.grandParent).attr("id")+' to class='+$(this.grandParent).attr("class"));
     //
@@ -397,6 +395,16 @@ function SAEWheelChart(canvasId, name, options) {
 
         style.appendChild(document.createTextNode(css));
     }
+
+    this.show = function() {
+        $(this.canvas).css('opacity', 1);
+    }
+    this.hide = function() {
+        $(this.canvas).css('opacity', 0);
+    }
+    this.destroy = function() {
+        this.chart.destroy();
+    }
 }
 //
 // Init default SAEWheelChart Class values
@@ -429,9 +437,10 @@ SAEWheelChart.prototype.tootipStyleCSS = '*[tooltip] {position: relative;}' +
     'transition: opacity 15s ease-in-out;' +
     'position: absolute; ' +
     'pointer-events: none;    ' +
-    'background: #fff;' +
+    'color: rgba(255,255,255,1);' +
+    'background: rgba(0,0,0,0.8);' +
     'border: 0px solid #c0c0c0;' +
-    'box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);' +
+   /* 'box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);' +*/
     'z-index: 2;' +
     '}' +
     '*[tooltip]:hover::after {' +

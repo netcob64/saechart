@@ -31,15 +31,12 @@ body {
     flex: 2 4 auto;
     min-width: 500px;
     max-width: 1000px;
-  
 }
-.chart-container {
-	  /*background-color: #aaa;*/ opacity: 0;
-    transition: opacity 1.5s ease-out;
-}
+
 #historyTitle{
 	flex: 1 1 auto;
 }
+
 #tendence {
     order: 2;
     flex: 1 1 auto;

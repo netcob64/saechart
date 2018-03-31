@@ -1,33 +1,65 @@
-  <link rel="stylesheet" href="/snm/dsi/SiteAssets/SitePages/saechart/SAECharts/stylesheets/style.css">
-  <script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/js/MicrosoftAjax.js"></script>
-    <script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/js/Chart.bundle.min.js"></script>
-    <script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/SAECharts/js/SAEChart-v2.js"></script>
-    <script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/SAECharts/js/SAEWheelChartInSP-v2.js"></script>
+<link rel="stylesheet" href="/snm/dsi/SiteAssets/SitePages/saechart/SANDBOX_QRQC_KPI/style.css">
+<script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/js/MicrosoftAjax.js"></script>
+<script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/js/Chart.bundle.min.js"></script>
+<script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/SAECharts/js/SAEChart-v2.js"></script>
+<script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/SAECharts/js/SAEWheelChartInSP-v2.js"></script>
 <script type="text/javascript" src="/snm/dsi/SiteAssets/SitePages/saechart/SANDBOX_QRQC_KPI/SANDBOX_QRQC_KPI.js"></script>
- <h1 style="font-family:Segoe UI SemiBold;color:rgb(31,78,121);text-align:center;">
+<h1 style="font-family:Segoe UI SemiBold;color:rgb(31,78,121);text-align:center;">
         QRQC SANDBOX <span id="title"></span></h1>
-    <div id="yearMenu" class="switch-field"></div>
-    <div id="monthMenu" class="switch-field">
-    </div>
-    <div id="graphbox">
-        <div id="currentkpi" class="chart-container" tooltip="on">
-            <canvas id="canvasWheelChart"></canvas>
-        </div>
-        <div id="tendence" tooltip="on">
-            <div id="historyTitle">
-                <h2>Historique et tendance...</h2></div>
-            <canvas id="lineChart"></canvas>
-        </div>
-    </div>
-    <div id="legend"></div>
-<div style="width:100%;text-align:right;">
-<a href="/snm/dsi/pdp/_layouts/15/start.aspx#/Lists/GraphData/AllItems.aspx?InitialTabId=Ribbon%2EListItem&VisibilityContext=WSSTabPersistence">GraphData SP List</a>
+<div id="yearMenu" class="switch-field"></div>
+<div id="monthMenu" class="switch-field">
 </div>
-<h2>Technologies utils&eacute;es</h2>
-<ul>
-<li>MicrosoftAjax</li>
-<li><a href="https://msdn.microsoft.com/fr-fr/library/jj193034.aspx">Microsoft SharePoint Web API</a></li>
-<li><a href="http://www.chartjs.org/">ChartJS</a></li>
-<li><a href="https://jquery.com/">JQuery</a></li>
-</ul>
+<div id="graphbox">
+    <div id="currentkpi" class="chart-container" tooltip="on">
+        <canvas id="canvasWheelChart"></canvas>
+    </div>
+    <div id="tendence" tooltip="on">
+        <div id="historyTitle">
+            <h2>Historique et tendance...</h2></div>
+        <canvas id="lineChart"></canvas>
+    </div>
+</div>
+<div id="legend"></div>
+<div style="text-align:center;">
+<table cellpadding="10" cellspacing="10" style="text-align:left;">
+    <tr>
+        <td valign="top" style="">
+            <h2>Technologies utils&eacute;es</h2>
+            <ul>
+                <li>MicrosoftAjax</li>
+                <li><a href="https://msdn.microsoft.com/fr-fr/library/jj193034.aspx">Microsoft SharePoint Web API</a></li>
+                <li><a href="http://www.chartjs.org/">ChartJS</a></li>
+                <li><a href="https://jquery.com/">JQuery</a></li>
+            </ul>
+        </td>
+        <td valign="top" style="border-left:1px solid #999;">
+            <h2>Sources</h2>
+            <ul>
+                <li>
+                    <a href="https://github.com/netcob64/saechart">GitHub saechart</a>
+                </li>
+            </ul>
+        </td>
+        <td valign="top" style="border-left:1px solid #999;">
+            <h2>SharePoint List</h2>
+            <ul>
+                <li>
+                    SharePoint List used for persistence : <a href="<b>/snm/dsi/pdp/_layouts/15/start.aspx#/Lists/KPISandBox/AllItems.aspx"><b>KPISandBox</b></a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+</div>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+
+<head>
+    <!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:_dlc_DocId msdt:dt="string">SNECDSI-7-117</mso:_dlc_DocId>
+<mso:_dlc_DocIdItemGuid msdt:dt="string">50a75c83-b9f1-4a64-8872-5482b96fb556</mso:_dlc_DocIdItemGuid>
+<mso:_dlc_DocIdUrl msdt:dt="string">https://teams.collab.group.safran/snm/dsi/_layouts/15/DocIdRedir.aspx?ID=SNECDSI-7-117, SNECDSI-7-117</mso:_dlc_DocIdUrl>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>

@@ -24,6 +24,7 @@ function SAESPWheelChart(p) {
     this.spListItemTitle = p.spListItemTitle || -1;
     this.spScriptbase = p.spScriptbase || -1;
     this.siteUrl = p.spListeUrl || -1;
+
     if (this.siteUrl == -1 || this.spScriptbase == -1 || this.spListItemTitle == -1) {
         console.error('spListName, spListItemTitle and spScriptbase must be provided!');
         alert('spListName, spListItemTitle and spScriptbase must be provided!');
@@ -33,18 +34,34 @@ function SAESPWheelChart(p) {
     var runtimeLib = 'SP.Runtime.js';
     var spLib = 'SP.js';
 
+    this.show = function() {
+        this.chart.show();
+    }
+    this.hide = function() {
+        this.chart.hide();
+    }
+    this.destroy = function() {
+        if (this.chart !=null) this.chart.destroy();
+    }
 
     function SAESPinitSPLibAndLoadScript(loadHandler) {
         if (!SAESPWheelChart.prototype.SPScriptLoaded && !SAESPWheelChart.prototype.SPScriptIsLoading) {
             SAESPWheelChart.prototype.SPScriptIsLoading = true;
+            console.log('loading SP scripts...');
             $.getScript(me.spScriptbase + runtimeLib,
                 function() {
-                    $.getScript(me.spScriptbase + spLib, loadHandler);
+                    console.log(me.spScriptbase + runtimeLib + ' loaded...');
+                    $.getScript(me.spScriptbase + spLib, function() {
+                        console.log(me.spScriptbase + spLib + ' loaded...');
+                        loadHandler();
+                    });
                 }
             );
         } else if (SAESPWheelChart.prototype.SPScriptLoaded) {
+            console.log('SP scripts loaded...');
             loadHandler();
         } else {
+            console.log('Waiting for SP scripts to be loaded...');
             var del = 500;
             console.warn('SAESPinitSPLibAndLoadScript waiting ' + del + 'ms...');
             setTimeout(function() {
@@ -78,13 +95,13 @@ function SAESPWheelChart(p) {
                 camlQuery.set_viewXml("<View>" +
                     "<Query>" +
                     "<Where><Eq>" +
-                    "<FieldRef Name='"+spListFieldNames.title+"' />" +
+                    "<FieldRef Name='" + spListFieldNames.title + "' />" +
                     "<Value Type='Text'>" + me.spListItemTitle + "</Value>" +
                     "</Eq></Where>" +
                     "</Query>" +
                     "</View>");
                 me.collListItem = oList.getItems(camlQuery);
-                clientContext.load(me.collListItem, 'Include('+spListFieldNames.title+','+spListFieldNames.id+','+spListFieldNames.data+','+spListFieldNames.options+','+spListFieldNames.name+','+spListFieldNames.year+','+spListFieldNames.month+','+spListFieldNames.dimensions+','+spListFieldNames.unlock+')');
+                clientContext.load(me.collListItem, 'Include(' + spListFieldNames.title + ',' + spListFieldNames.id + ',' + spListFieldNames.data + ',' + spListFieldNames.options + ',' + spListFieldNames.name + ',' + spListFieldNames.year + ',' + spListFieldNames.month + ',' + spListFieldNames.dimensions + ',' + spListFieldNames.unlock + ')');
 
                 clientContext.executeQueryAsync(Function.createDelegate(this, me.onLoadQuerySucces),
                     Function.createDelegate(this, me.onLoadQuerySucces));
@@ -165,7 +182,7 @@ function SAESPWheelChart(p) {
             }
         } catch (error) {
             console.error(error.message);
-            alert('Erreur: Probleme avec la liste Sharepoint ' + me.siteUrl + '/[Listes]/' + me.spListName + ' ' + me.spListItemTitle+'\n'+error.message);
+            alert('Erreur: Probleme avec la liste Sharepoint ' + me.siteUrl + '/[Listes]/' + me.spListName + ' ' + me.spListItemTitle + '\n' + error.message);
         }
         if (data == -1 || data == undefined) {
             me.onDataError('Erreur au chargement des donnes du graph : "' + me.spListItemTitle + '" from ' + me.siteUrl + '/' + me.spListName);
@@ -264,11 +281,11 @@ function SAESPWheelChart(p) {
                 var camlQuery = new SP.CamlQuery();
 
 
-                camlQuery.Query = '<OrderBy><FieldRef Name="'+spListFieldNames.title+'"  Ascending="TRUE" /></OrderBy>';
+                camlQuery.Query = '<OrderBy><FieldRef Name="' + spListFieldNames.title + '"  Ascending="TRUE" /></OrderBy>';
                 camlQuery.RowLimit = 100;
                 me.collListItem = oList.getItems(camlQuery);
 
-                clientContext.load(me.collListItem, 'Include('+spListFieldNames.title+','+spListFieldNames.id+','+spListFieldNames.data+','+spListFieldNames.options+','+spListFieldNames.name+','+spListFieldNames.year+','+spListFieldNames.month+','+spListFieldNames.dimensions+','+spListFieldNames.unlock+')');
+                clientContext.load(me.collListItem, 'Include(' + spListFieldNames.title + ',' + spListFieldNames.id + ',' + spListFieldNames.data + ',' + spListFieldNames.options + ',' + spListFieldNames.name + ',' + spListFieldNames.year + ',' + spListFieldNames.month + ',' + spListFieldNames.dimensions + ',' + spListFieldNames.unlock + ')');
 
                 clientContext.executeQueryAsync(Function.createDelegate(this, me.onLoadTrendQuerySucces),
                     Function.createDelegate(this, me.onLoadTrendQuerySucces));
@@ -328,7 +345,7 @@ function SAESPWheelChart(p) {
             //console.log("trendLabels: " + trendLabels);
             //console.log("trendData: " + trendData);
         } catch (error) {
-            alert('Erreur au chargement des donnees du graph : "' + me.spListItemTitle + '" depuis ' + me.siteUrl + '/' + me.spListName+'\n'+error.message);
+            alert('Erreur au chargement des donnees du graph : "' + me.spListItemTitle + '" depuis ' + me.siteUrl + '/' + me.spListName + '\n' + error.message);
 
         }
         if (me.loadTrendHandler != -1) {
@@ -342,7 +359,7 @@ function SAESPWheelChart(p) {
     this.onLoadTrendQueryError = function(sender, args) {
         me.onDataError('Load Trend data Request failed. ' + args.get_message());
     }
-    var spListFieldNames={
+    var spListFieldNames = {
         "id": "Id",
         "title": "Title",
         "month": "Mois",
