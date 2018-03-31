@@ -23,13 +23,14 @@ It may be usefull to add the following features :
 
 ## package content
 ```
-**js**/                                  jquery, MS Ajax, and ChartJS javascript lib
+js/                                  jquery, MS Ajax, and ChartJS javascript lib
 SAECharts/
  └─── stylesheets/                   exemple of css
  └─── js/
       └─── SAEChart-v2.js            customisation of Doughnut chart from ChartJS to create SAEWheelChart class
       └─── SAEWheelChartInSP-v2.js   link SAEWheelChart with SharePoint persistence ability
-SANDBOX_QRQC_KPI/
+
+SANDBOX_QRQC_KPI/                    Implementation example
  └─── HTML_TO_ADD_IN_SP_PAGE.html    htlm code to be inserted in SharePoint ScriptEditor Webpart in the final end user SharePoint page
  └─── style.css                      css used by SharePoint page
  └─── SANDBOX_QRQC_KPI.js            script to manage the SharePoint end user page behavior
