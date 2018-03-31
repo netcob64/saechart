@@ -23,7 +23,7 @@ It may be usefull to add the following features :
 
 # package content
 `
-+ js/ : jquery, MS Ajax, and ChartJS javascript lib
++ / : jquery, MS Ajax, and ChartJS javascript lib
 + SAECharts/
 + -- stylesheets/ : exemple of css
 + -- js/
@@ -35,7 +35,7 @@ It may be usefull to add the following features :
 +    -- SANDBOX_QRQC_KPI.js : scipt to manage the SharePoint end user page behavior
 `
 ```
-project
+js
 │   README.md
 │   file001.txt    
 │
@@ -52,3 +52,12 @@ project
     │   file021.txt
     │   file022.txt
 ```
+|             |          Grouping           ||
+First Header  | Second Header | Third Header |
+ ------------ | :-----------: | -----------: |
+Content       |          *Long Cell*        ||
+Content       |   **Cell**    |         Cell |
+
+New section   |     More      |         Data |
+And more      | With an escaped '\|'         ||  
+[Prototype table]
