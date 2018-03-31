@@ -15,13 +15,13 @@ It may be usefull to add the following features :
 + add a way to add values in WheelChart cells in oder to manage more in detail the KPI threshold
 + add ability to add comments on a given chart cell
 
-# used framework
+## used framework
 + JQuery https://jquery.com/
 + MS Ajax
 + SharePoint 2013 javascript https://msdn.microsoft.com/fr-fr/library/jj193034.aspx
 + ChartJS http://www.chartjs.org/
 
-# package content
+## package content
 ```
 js/                                  jquery, MS Ajax, and ChartJS javascript lib
 SAECharts/
@@ -34,4 +34,4 @@ SANDBOX_QRQC_KPI/
  └─── style.css                      css used by SharePoint page
  └─── SANDBOX_QRQC_KPI.js            script to manage the SharePoint end user page behavior
 ```
-
+## SharePoint List structure
