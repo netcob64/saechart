@@ -35,5 +35,7 @@ SANDBOX_QRQC_KPI/
  └─── SANDBOX_QRQC_KPI.js            script to manage the SharePoint end user page behavior
 ```
 ## SharePoint List structure
-Column | Type | Mandatory
--- | -- | --
+Column | Type | Mandatory | Name in API
+-- | -- | -- | --
+Titre | One text line | YES | **Title**
+Mois | Choice | | Mois
