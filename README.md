@@ -34,9 +34,9 @@ It may be usefull to add the following features :
 +    -- style.css : css used by SharePoint page
 +    -- SANDBOX_QRQC_KPI.js : scipt to manage the SharePoint end user page behavior
 `
-```
-js | comment
-│   README.md | coucou
+
+```js``` | comment
+```│   README.md``` | coucou
 --- | ---
 │   file001.txt    
 │
