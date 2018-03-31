@@ -34,3 +34,21 @@ It may be usefull to add the following features :
 +    -- style.css : css used by SharePoint page
 +    -- SANDBOX_QRQC_KPI.js : scipt to manage the SharePoint end user page behavior
 `
+```
+project
+│   README.md
+│   file001.txt    
+│
+└───folder1
+│   │   file011.txt
+│   │   file012.txt
+│   │
+│   └───subfolder1
+│       │   file111.txt
+│       │   file112.txt
+│       │   ...
+│   
+└───folder2
+    │   file021.txt
+    │   file022.txt
+```
