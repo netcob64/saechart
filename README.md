@@ -38,10 +38,10 @@ SANDBOX_QRQC_KPI/                    Implementation example
 ## SharePoint List structure
 Column | Type | Mandatory | Name in API | Values | Usage
 -- | -- | -- | -- | -- | --
-Titre | One text line | YES | **Title** | used as an index to select chart data
+Titre | One text line | YES | **Title** | | used as an index to select chart data
 Mois | Choice | | Mois | {1, 2, .. 12} | defines the month of the chart
 Annee | Choice | | Annee | {2017, .. 2019...} | defines the year of the chart
-Nom | One text line | | Nom | | | defines the letters in the center of the chart
+Nom | One text line | | Nom | | defines the letters in the center of the chart
 Options | Several text lines | | Options | [json data] | options of the chart
 Donnees | Several text lines | | Donnees | [json data] | data series of the chart
 Dimensions | Choice | | Dimensions | {1, 2, ..5} | number of data series of the chart
