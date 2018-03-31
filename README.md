@@ -35,8 +35,9 @@ It may be usefull to add the following features :
 +    -- SANDBOX_QRQC_KPI.js : scipt to manage the SharePoint end user page behavior
 `
 ```
-js
-│   README.md
+js | comment
+│   README.md | coucou
+--- | ---
 │   file001.txt    
 │
 └───folder1
