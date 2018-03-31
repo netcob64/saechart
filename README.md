@@ -53,7 +53,6 @@ It may be usefull to add the following features :
     │   file021.txt
     │   file022.txt
 
-js 
-| jquery, MS Ajax, and ChartJS javascript lib 
+js | jquery, MS Ajax, and ChartJS javascript lib 
 --- | --- 
 README.md | cutomisation of Doughnut chart from ChartJS to create SAEWheelChart class 
