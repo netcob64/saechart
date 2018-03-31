@@ -40,7 +40,7 @@ Column | Type | Mandatory | Name in API | Values
 Titre | One text line | YES | **Title** | 
 Mois | Choice | | Mois | {1, 2, .. 12}
 Annee | Choice | | Annee | {2017, .. 2019...}
-Nom | One text line | Nom | 
+Nom | One text line | | Nom | 
 Options | Several text lines | | Options | [json data]
 Donnees | Several text lines | | Donnees | [json data]
 Dimensions | Choice | | Dimensions | {1, 2, ..5}
