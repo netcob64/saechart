@@ -15,11 +15,22 @@ var darkColorSeries = ['rgba(0, 104, 179,1)',
 ];
 
 var ch1;
-var m = '01';
-var y = '2018';
+var d = new Date();
+var curYear = d.getFullYear();
+var curMonth = d.getMonth();
+var years = []
+for (var i = 0; i < yearMenuLength; i++) {
+    years.push(curYear - 1 + i);
+}
+var months = ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'];
+
+var m = curMonth + 1;
+m = (m > 9 ? m.toSting() : '0' + m.toString());
+var y = curYear.toString();
 var pm = m;
 var py = y;
 var nbKPI = 3;
+var yearMenuLength = 3;
 var monthButtonSelected;
 var prevMonthButtonSelected;
 var yearButtonSelected;
@@ -36,7 +47,9 @@ var fontColor = "rgb(10,10,10)";
 var gridColor = "rgb(10,10,10)";
 var gridColorLight = "rgba(31,78,121,0.3)";
 var font = 'Segoe UI SemiBold';
-var legends = ["Incidents DSI", "Incidents SAFRAN", "Incidents ATOS"];
+var legends = ["Incidents DSI", "Alertes CODIR DSI", "Incidents ATOS"];
+
+var legendsInfo = ["Incidents DSI", "Alertes CODIR DSI: TI n'a pas &eacute;t&eacute; inform&eacute; du pb avant l'escalade au manager d'astreinte ou au DSI", "Incidents ATOS"];
 var param = {
     "canvasId": undefined,
     "spListeUrl": '/snm/dsi/pdp',
@@ -159,37 +172,37 @@ $(document).ready(function() {
 
                     // The data for our dataset
                     data: {
-                labels: labels,
-                datasets: [{
-                    label: legends[0],
-                    fill: false,
-                    backgroundColor: colorSeries[0],
-                    borderColor: darkColorSeries[0],
-                    pointBackgroundColor: colorSeries[0],
-                    pointBorderColor: darkColorSeries[0],
-                    pointBorderWidth: 3,
-                    data: computedData[0]
-                }, {
-                    label: legends[1],
-                    fill: false,
-                    backgroundColor: colorSeries[3],
-                    borderColor: darkColorSeries[3],
-                    pointBackgroundColor: colorSeries[3],
-                    pointBorderColor: darkColorSeries[3],
-                    pointBorderWidth: 3,
-                    data: computedData[1]
-                }, {
-                    label: legends[2],
+                        labels: labels,
+                        datasets: [{
+                            label: legends[0],
+                            fill: false,
+                            backgroundColor: colorSeries[0],
+                            borderColor: darkColorSeries[0],
+                            pointBackgroundColor: colorSeries[0],
+                            pointBorderColor: darkColorSeries[0],
+                            pointBorderWidth: 3,
+                            data: computedData[0]
+                        }, {
+                            label: legends[1],
+                            fill: false,
+                            backgroundColor: colorSeries[3],
+                            borderColor: darkColorSeries[3],
+                            pointBackgroundColor: colorSeries[3],
+                            pointBorderColor: darkColorSeries[3],
+                            pointBorderWidth: 3,
+                            data: computedData[1]
+                        }, {
+                            label: legends[2],
 
-                    fill: false,
-                    backgroundColor: colorSeries[4],
-                    borderColor: darkColorSeries[4],
-                    pointBackgroundColor: colorSeries[4],
-                    pointBorderColor: darkColorSeries[4],
-                    pointBorderWidth: 3,
-                    data: computedData[2]
-                }]
-            },
+                            fill: false,
+                            backgroundColor: colorSeries[4],
+                            borderColor: darkColorSeries[4],
+                            pointBackgroundColor: colorSeries[4],
+                            pointBorderColor: darkColorSeries[4],
+                            pointBorderWidth: 3,
+                            data: computedData[2]
+                        }]
+                    },
 
                     // Configuration options go here
                     options: {
@@ -220,18 +233,16 @@ $(document).ready(function() {
         });
     });
 
-
-    createMenu('year', $('#yearMenu'), [2016, 2017, 2018], 2018, yearPrefix, 'SelectYear');
+    createMenu('year', $('#yearMenu'), years, curYear, yearPrefix, 'SelectYear');
     prevYearButtonSelected = yearButtonSelected = $('#' + yearPrefix + y);
 
-    createMenu('month', $('#monthMenu'), ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'], 'Janvier', monthPrefix, 'SelectMonth');
-
+    createMenu('month', $('#monthMenu'), months, months[curMonth], monthPrefix, 'SelectMonth');
     prevMonthButtonSelected = monthButtonSelected = $('#' + monthPrefix + m);
 
     var lgd = '<b>L&eacute;gende:</b> de l&quot;ext&eacute;rieur vers l&quot;int&eacute;rieur : ' +
         '<ul style="margin: initial;">';
-    for (var t in legends) {
-        lgd += '<li>' + legends[t] + '</li>';
+    for (var t in legendsInfo) {
+        lgd += '<li>' + legendsInfo[t] + '</li>';
     }
     lgd += '</ul>';
 
@@ -338,10 +349,10 @@ function reload() {
             show();
             $('#year').val(y);
             $('#title').text(y + '/' + m);
-/*
-            prevMonthButtonSelected.prop('checked', true);
-            monthButtonSelected = prevMonthButtonSelected;
-            prevYearButtonSelected.prop('checked', true);
-            yearButtonSelected = prevYearButtonSelected;*/
+            /*
+                        prevMonthButtonSelected.prop('checked', true);
+                        monthButtonSelected = prevMonthButtonSelected;
+                        prevYearButtonSelected.prop('checked', true);
+                        yearButtonSelected = prevYearButtonSelected;*/
         });
 }
