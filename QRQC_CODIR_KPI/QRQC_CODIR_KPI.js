@@ -15,6 +15,8 @@ var darkColorSeries = ['rgba(0, 104, 179,1)',
 ];
 
 var ch1;
+
+var yearMenuLength = 3;
 var d = new Date();
 var curYear = d.getFullYear();
 var curMonth = d.getMonth();
@@ -23,14 +25,12 @@ for (var i = 0; i < yearMenuLength; i++) {
     years.push(curYear - 1 + i);
 }
 var months = ['Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre'];
-
 var m = curMonth + 1;
 m = (m > 9 ? m.toSting() : '0' + m.toString());
 var y = curYear.toString();
 var pm = m;
 var py = y;
 var nbKPI = 3;
-var yearMenuLength = 3;
 var monthButtonSelected;
 var prevMonthButtonSelected;
 var yearButtonSelected;
